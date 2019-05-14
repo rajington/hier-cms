@@ -3,77 +3,60 @@
 # hier-cms
 a hierarchical git-based GraphQL CMS
 
-## Examples
-
-### Single File
+## Example Folder structure
     .
-    ├── foo
-    │   ├── bar.gql            # GQL input
+    ├── foo.gql                # Single GraphQL
 
-#### Data
-
-##### Define type interface
-`bar.gql`
+### Explicit interface (adds validation)
+`foo.gql` 
 ```gql
-interface Bar {
-  baz: Date!
+interface Foo {
+  date: Date!
 }
 
 {
-  baz: "2019-05-14"
+  date: "2019-05-14"
 }
 ```
-
-##### Infer type
-`bar.gql`
-```gql
-{
-  baz: "2019-05-14" # String inferred (unless parser is supplied)
-}
-```
-
-##### Type directive
-`bar.gql`
-```gql
-{
-  baz: "2019-05-14" @date
-}
-```
-
-#### Auto-generated Schema
-
 ```gql
 type Query {
-  foo: Foo!
+  date: Foo!
 }
 
-type Bar {
-  bar: FooBar!
-}
-
-type FooBar {
-  baz: Date!
+type Foo {
+  date: Date!
 }
 ```
 
-#### Query Request/Response
+### Infer type
+`foo.gql`
 ```gql
 {
-  foo {
-    bar {
-      baz
-    }
-  }
+  date: "2019-05-14" # String inferred (unless parser is supplied)
 }
 ```
-```json
+
+### Type directive
+`foo.gql`
+```gql
 {
-  "data": {
-    "foo": {
-      "bar": {
-        "baz": "2019-05-14"
-      }
-    }
-  }
+  date: "2019-05-14" @date
+}
+```
+
+### Optional curlies
+`foo.gql`
+```gql
+date: "2019-05-14"
+```
+
+### Optional key
+`foo.gql`
+```gql
+2019-05-14
+```
+```gql
+type Query {
+  date: Date!
 }
 ```
