@@ -66,7 +66,7 @@ date: "2019-05-14"
 ### Optional key
 `foo.gql`
 ```gql
-2019-05-14
+"2019-05-14"
 ```
 or
 `foo.yaml`
