@@ -11,9 +11,9 @@ a hierarchical git-based GraphQL CMS
     |   |── baz.gql  # Nesting/Namespacing
     |── qux          # Collections
     |   |── Qux.gql  # Interface (optional)
-    |   |── a.gql    # single input
-    |   |── b.gql    # single input
-    |   |── c.gql    # Multiple inputs
+    |   |── a.gql    # Single Input
+    |   |── b.gql    # Single Input
+    |   |── c.gql    # Multiple Inputs
 
 ### Explicit interface (adds validation)
 `foo.gql` 
@@ -112,6 +112,9 @@ type Query {
   qux: Qux!
 }
 type Qux {
+  a: QuxA!
+}
+type QuxA {
   message: String!
 }
 ```
@@ -123,7 +126,7 @@ interface Qux {    # interface, name, and curlies optional
 ```
 or a second: `qux/b.gql`
 ```
-message: "hello hier"
+message: "hello worlds"
 ```
 generates
 ```gql
