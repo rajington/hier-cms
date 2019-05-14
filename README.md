@@ -7,35 +7,73 @@ a hierarchical git-based GraphQL CMS
 
 ### Single File
     .
-    ├── ...
     ├── foo
     │   ├── bar.gql            # GQL input
-    └── ...
 
-#### Define type interface
+#### Data
+
+##### Define type interface
 `bar.gql`
 ```gql
 interface Bar {
-  qux: Date!
+  baz: Date!
 }
 
 {
-  qux: "2019-05-14"
-}
-```
-
-#### Infer type
-`bar.gql`
-```gql
-{
-  qux: "2019-05-14" # String inferred (unless parser is supplied)
+  baz: "2019-05-14"
 }
 ```
 
-#### Type directive
+##### Infer type
 `bar.gql`
 ```gql
 {
-  qux: "2019-05-14" @date
+  baz: "2019-05-14" # String inferred (unless parser is supplied)
+}
+```
+
+##### Type directive
+`bar.gql`
+```gql
+{
+  baz: "2019-05-14" @date
+}
+```
+
+#### Auto-generated Schema
+
+```gql
+type Query {
+  foo: Foo!
+}
+
+type Bar {
+  bar: FooBar!
+}
+
+type FooBar {
+  baz: Date!
+}
+```
+
+#### Query Request/Response
+```gql
+{
+  foo {
+    bar {
+      baz
+    }
+  }
+}
+```
+```json
+{
+  "data": {
+    "foo": {
+      "bar": {
+        "baz": "2019-05-14"
+      }
+    }
+  }
 }
 ```
