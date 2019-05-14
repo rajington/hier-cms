@@ -6,6 +6,7 @@ a hierarchical git-based GraphQL CMS
 ## Example Folder structure
     .
     ├── foo.gql                # Single GraphQL
+    ├── foo.yaml               # Single YAML
 
 ### Explicit interface (adds validation)
 `foo.gql` 
@@ -35,13 +36,23 @@ type Foo {
   date: "2019-05-14" # String inferred (unless parser is supplied)
 }
 ```
+or
+`foo.yaml`
+```yaml
+date: 2019-05-14
+```
 
-### Type directive
+### Explicit inline type
 `foo.gql`
 ```gql
 {
   date: "2019-05-14" @date
 }
+```
+or
+`foo.yaml`
+```yaml
+date: !date 2019-05-14
 ```
 
 ### Optional curlies
@@ -55,8 +66,13 @@ date: "2019-05-14"
 ```gql
 2019-05-14
 ```
+or
+`foo.yaml`
+```gql
+2019-05-14
+```
 ```gql
 type Query {
-  date: Date!
+  foo: String!
 }
 ```
