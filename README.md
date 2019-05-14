@@ -7,6 +7,8 @@ a hierarchical git-based GraphQL CMS
     .
     ├── foo.gql                # Single GraphQL
     ├── foo.yaml               # Single YAML
+    ├── bar
+    |   |── baz.gql            # Nesting/Namespacing
 
 ### Explicit interface (adds validation)
 `foo.gql` 
@@ -74,5 +76,22 @@ or
 ```gql
 type Query {
   foo: String!
+}
+```
+
+### Nesting/Namespacing
+`bar/baz.gql`
+```gql
+date: "2019-05-14"
+```
+```gql
+type Query {
+  bar: Bar!
+}
+type Bar {
+  baz: BarBaz!
+}
+type BarBaz {
+  date: Date!
 }
 ```
