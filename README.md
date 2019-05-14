@@ -5,10 +5,15 @@ a hierarchical git-based GraphQL CMS
 
 ## Example Folder structure
     .
-    ├── foo.gql                # Single GraphQL
-    ├── foo.yaml               # Single YAML
+    ├── foo.gql      # Single GraphQL
+    ├── foo.yaml     # Single YAML
     ├── bar
-    |   |── baz.gql            # Nesting/Namespacing
+    |   |── baz.gql  # Nesting/Namespacing
+    |── qux          # Collections
+    |   |── Qux.gql  # Interface (optional)
+    |   |── a.gql    # single input
+    |   |── b.gql    # single input
+    |   |── c.gql    # Multiple inputs
 
 ### Explicit interface (adds validation)
 `foo.gql` 
@@ -94,4 +99,24 @@ type Bar {
 type BarBaz {
   date: Date!
 }
+```
+
+### Collection (WIP)
+`qux/a.gql`
+```
+message: "hello world"
+```
+generates
+```gql
+type Query {
+  qux: Qux!
+}
+type Qux {
+  message: String!
+}
+```
+but adding an interface second
+`qux/b.gql`
+```
+message: "hello world"
 ```
