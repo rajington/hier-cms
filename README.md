@@ -101,7 +101,7 @@ type BarBaz {
 }
 ```
 
-### Collection (WIP)
+### Collection
 `qux/a.gql`
 ```
 message: "hello world"
@@ -115,8 +115,28 @@ type Qux {
   message: String!
 }
 ```
-but adding an interface second
-`qux/b.gql`
+but adding an interface: `qux/Qux.gql`
 ```
-message: "hello world"
+interface Qux {    # interface, name, and curlies optional
+  message: String!
+}
+```
+or a second: `qux/b.gql`
+```
+message: "hello hier"
+```
+generates
+```gql
+type Query {
+  qux: [Qux!]!
+}
+type Qux {
+  message: String!
+}
+```
+including multiple inputs per file: `qux/c.gql`
+```gql
+{ message: "hello first" }
+{ message: "hello second" }
+{ message: "hello third" }
 ```
